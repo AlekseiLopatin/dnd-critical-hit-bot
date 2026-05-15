@@ -1,99 +1,137 @@
-<a name="readme-top"></a>
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="[https://github.com/github_username/repo_name](https://github.com/AlekseiLopatin/critical_hit_bot)">
-    <img src="https://github.com/AlekseiLopatin/critical_hit_bot/assets/135117364/aff8e722-4fe9-4313-b97e-0d879850fd37" alt="Logo" width="80" height="80">
-  </a>
-</div>
+<h1 align="center">D&D Critical Hit Bot</h1>
 
+<p align="center">A Discord bot that resolves extended critical-hit rules for Dungeons & Dragons — so your party can keep the story moving instead of flipping through rulebooks.</p>
 
-<h3 align="center">Critical_hit_bot</h3>
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img alt="discord.py" src="https://img.shields.io/badge/discord.py-2.x-5865F2?style=flat-square&logo=discord&logoColor=white">
+  <img alt="License" src="https://img.shields.io/github/license/AlekseiLopatin/dnd-critical-hit-bot?style=flat-square&color=blue">
+  <img alt="Last commit" src="https://img.shields.io/github/last-commit/AlekseiLopatin/dnd-critical-hit-bot?style=flat-square">
+</p>
 
-  <p align="center">
-    A discord bot for a fantasy tabletop role-playing game DnD, that rolls a different types of dices from d6 to d100 based on types of damage and a player.
-  </p>
+<p align="center">
+  <img src="docs/screenshots/logo.jpg" alt="Critical Hit Bot logo" width="320">
+</p>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#dungeons-and-dragons">Dungeons and Dragons</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+---
 
+## What it does
 
+When a player rolls a natural 20 in D&D 5e, the result depends on the type of damage being dealt and which side of the table you're on (player or DM). The official rulings live in two Nord Games sourcebooks — *Critical Hits for Players* and *Critical Hits for Game Masters* — which each contain a hundred-plus possible outcomes spread across damage types.
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
-FOR DnD ONLY (and for personal use only)!!! When you get a critical hit while playing DnD, use this chat bot to define the level of your crit (damage type matters). Critical Hit Bot can do it faster for you, no need to use the book. 
-![Screenshot_crit_bot5](https://github.com/AlekseiLopatin/critical_hit_bot/assets/135117364/4d7874ef-8584-4488-a100-ce3bed37a69c)
-<br />
-Here are the books used for the code (created by [Nord Games](https://nordgamesllc.com/)): 
-1) [Critical hits for players.pdf](https://github.com/AlekseiLopatin/critical_hit_bot/files/13960889/Critical.hits.for.players.pdf)
-2) [Critical hits for game master.pdf](https://github.com/AlekseiLopatin/critical_hit_bot/files/13960913/Critical.hits.for.game.master.pdf)
+This bot replaces flipping through those books with a single Discord slash command. It also integrates with the [LongStoryShort](https://longstoryshort.app/) interactive character sheet so that any d100 roll made there is automatically resolved in your channel.
 
+## Features
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- **Slash commands** for player crits, GM crits, spell crits (by damage type), and anti-crits
+- **Webhook integration** with LongStoryShort — auto-rolls trigger a critical-hit response in chat
+- **Damage-type aware** — fire, cold, necrotic, radiant, etc. each pull from the correct table
+- **Lightweight** — single-file bot, no database, runs anywhere Python runs
 
+## Demo
 
-<!-- GETTING STARTED -->
-## Getting Started
+| Slash commands | Webhook integration |
+|:--:|:--:|
+| <img src="docs/screenshots/slash-commands.jpg" alt="Slash command output" width="380"> | <img src="docs/screenshots/webhook.jpg" alt="Webhook critical hit" width="380"> |
 
-1) Create a channel in discord and add the bot to the channel 
-2) Add your discord bot token to the code
-3) Run the code
-4) Your bot is working while your code is running
+## Tech stack
 
+- **Python 3.10+**
+- **discord.py 2.x** — for the Discord client and slash command framework
+- **aiohttp** — for the LongStoryShort webhook listener
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Getting started
 
+### Prerequisites
 
-<!-- USAGE EXAMPLES -->
+- Python 3.10 or newer
+- A Discord account and a server you can manage
+- A Discord bot token (see [Discord's developer docs](https://discord.com/developers/docs/quick-start/getting-started))
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/AlekseiLopatin/dnd-critical-hit-bot.git
+cd dnd-critical-hit-bot
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate   # on Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Configuration
+
+Create a `.env` file in the project root:
+
+```env
+DISCORD_TOKEN=your-bot-token-here
+GUILD_ID=your-discord-server-id
+```
+
+Then invite the bot to your server using the OAuth2 URL generated in the Discord developer portal — the bot needs `Send Messages`, `Use Slash Commands`, and `Embed Links` permissions.
+
+### Run
+
+```bash
+python bot/main.py
+```
+
+The bot stays online as long as the process is running. For 24/7 operation, deploy it to a service like [Railway](https://railway.app/) or a small VPS.
+
 ## Usage
 
-The result can be shown in 2 ways, manually if you roll your dices offline (by using '/' commands), and by rolling d100 online in an interactive character sheet application [LongStoryShort](https://longstoryshort.app/about/)  
-`Slash '/' commands`:
-![Screenshot_crit_bot3](https://github.com/AlekseiLopatin/critical_hit_bot/assets/135117364/1431cdd4-3dfe-4c8b-a12a-9784be8809ac)
-1) `/crit #` - for players
-2) `/critgm #` - for gamemasters
-3) `/critspell #` - for different damage types magic critical hits
-4) `/anticrit #` - for anticrits
+| Command | Who uses it | What it does |
+|---|---|---|
+| `/crit <number>` | Players | Looks up a player critical-hit result by d100 roll |
+| `/critgm <number>` | Dungeon Masters | Looks up a GM critical-hit result by d100 roll |
+| `/critspell <number> <damage_type>` | Players & DMs | Resolves a magic critical hit by damage type (fire, cold, necrotic, etc.) |
+| `/anticrit <number>` | Players & DMs | Resolves an anti-crit (a roll of 1 with consequences) |
 
-If you have a webhook from [LongStoryShort](https://longstoryshort.app/about/) every time you roll d100 (d100 rolls only in 2 cases: critical hit or when you loot the treasure) the bot responses with a critical hit  
-![Screenshot_crit_bot2](https://github.com/AlekseiLopatin/critical_hit_bot/assets/135117364/59cee9dc-d9e1-401f-99d7-fe4393fa7c7e)
+If you have the LongStoryShort webhook configured, you don't need to invoke any command — d100 rolls in the character sheet trigger the bot automatically.
 
+## Project structure
 
+```
+dnd-critical-hit-bot/
+├── bot/
+│   ├── main.py              # Bot entry point and command registration
+│   ├── crit_tables.py       # Player and GM critical-hit lookup tables
+│   ├── spell_tables.py      # Damage-type tables for magical crits
+│   └── webhook.py           # LongStoryShort webhook listener
+├── docs/
+│   └── screenshots/         # Images used in this README
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Roadmap
 
+- [ ] Configurable rule sets (5e, Pathfinder, homebrew)
+- [ ] Per-server settings stored in a small DB
+- [ ] Dockerfile for one-command deploy
+- [ ] Unit tests for the lookup tables
 
-<!-- Dungeons and Dragons -->
-## Dungeons and Dragons
+## Credits
 
-In Dungeons & Dragons, the players form an adventuring party who explore fantasy worlds together as they embark on epic quests and level up in experience. The Dungeon Master (also known as the DM) is the game's referee and storyteller. There’s no winning or losing in D&D—at least, not in the conventional way.  
-At its heart, D&D is a game that focuses on storytelling. The dice just help you along. Everything is your decision, from what you look like, to how you act, to what happens next.  
-The collective creativity in your D&D game builds stories that you’ll tell again and again—ranging from the stuff of legend to absurd incidents that’ll make you laugh years later.  
-Have fun and remember the golden rule—never split the party!
+The critical-hit tables themselves are the work of [Nord Games](https://nordgamesllc.com/), used here for personal play only:
 
+- [*Critical Hits for Players*](https://nordgamesllc.com/)
+- [*Critical Hits for Game Masters*](https://nordgamesllc.com/)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+If you use this bot regularly, consider buying their books to support the creators.
 
+Other things this project depends on:
 
+- [discord.py](https://discordpy.readthedocs.io/) — the Python Discord API wrapper
+- [LongStoryShort](https://longstoryshort.app/) — the interactive character sheet that powers webhook rolls
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## License
 
-* [Discord](https://discord.com/)
-* [LongStoryShort](https://longstoryshort.app/)
-* [Nord Games](https://nordgamesllc.com/)
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
+Note: This bot is intended for personal use with friends. The rule content itself remains the intellectual property of Nord Games.
