@@ -32,7 +32,7 @@ This bot replaces flipping through those books with a single Discord slash comma
 
 | Slash commands | Webhook integration |
 |:--:|:--:|
-| <img src="docs/screenshots/slash-commands.jpg" alt="Slash command output" width="380"> | <img src="docs/screenshots/webhook.jpg" alt="Webhook critical hit" width="380"> |
+| <img src="docs/screenshots/commands.png" alt="Slash command output" width="380"> | <img src="docs/screenshots/webhook.png" alt="Webhook critical hit" width="380"> |
 
 ## Tech stack
 
